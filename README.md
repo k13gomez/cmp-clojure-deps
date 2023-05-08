@@ -1,4 +1,4 @@
-# cmp-npm
+# cmp-clojure-deps
 
 This is an additional source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp), it allows you to
 autocomplete [clojure](https://clojure.org/guides/deps_and_cli) library versions.
@@ -30,12 +30,28 @@ use {
 Run the `setup` function and add the source
 ```lua
 require('cmp-clojure-deps').setup({})
+
 cmp.setup({
   ...,
   sources = {
-    { name = 'clojure', keyword_length = 4 },
+    { name = 'clojure-tools-deps' },
     ...
-  }
+  },
+  sorting = {
+    -- tweak sorting as needed, these are reasonable settings
+    comparators = {
+      compare.exact,
+      compare.score,
+      compare.order, -- this is recommended for correct sorting
+      compare.offset,
+      compare.recently_used,
+      compare.locality,
+      compare.kind,
+      compare.sort_text,
+      compare.length
+    }
+  },
+  ...
 })
 ```
 (in Vimscript, make sure to add `lua << EOF` before and `EOF` after the lua code)
@@ -56,7 +72,6 @@ e.g. `ignore = { 'beta', 'rc' }`.
   the `major.minor.patch` schema.
 - `only_latest_version` (Boolean): If `true`, will only show latest release version.
 
-
 ## Limitations
 
-The versions are not correctly sorted (depends on `nvim-cmp`'s sorting algorithm).
+The versions are not correctly sorted unless you configure the nvim-cmp `compare.order` sorter.
