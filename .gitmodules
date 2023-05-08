@@ -1,0 +1,3 @@
+[submodule "tools-deps-native"]
+	path = tools-deps-native
+	url = https://github.com/k13gomez/tools-deps-native.git
