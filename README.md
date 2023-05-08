@@ -8,7 +8,7 @@ The source is only active if you're in a `deps.edn` file.
 
 ## Requirements
 
-It needs the Neovim plugin [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and the [clojure](https://clojure.org/guides/deps_and_cli) command line tool.
+It needs the Neovim plugin [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and [tools-deps-native](https://github.com/k13gomez/tools-deps-native) command line tool compiled and in your path. The `tools-deps-native` tool has been linked as a submodule but it needs to be compiled and copied somewhere in your path.
 
 ## Installation
 
