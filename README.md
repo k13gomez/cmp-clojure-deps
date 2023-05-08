@@ -4,6 +4,8 @@ This is an additional source for [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
 autocomplete [clojure](https://clojure.org/guides/deps_and_cli) library versions.
 The source is only active if you're in a `deps.edn` file.
 
+![cmp-clojure-demo](https://user-images.githubusercontent.com/1457616/236848226-fa0d4d2c-8e35-4c94-8285-eadc887644ff.gif)
+
 ## Requirements
 
 It needs the Neovim plugin [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) and the [clojure](https://clojure.org/guides/deps_and_cli) command line tool.
