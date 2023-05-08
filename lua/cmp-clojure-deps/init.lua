@@ -23,14 +23,14 @@ end
 
 
 function source:complete(params, callback)
-  -- figure out if we are completing the package name or version
   local cur_line = params.context.cursor_line
   local cur_col = params.context.cursor.col
-  local name = string.match(cur_line, '%s*([\w\/\-\.]+)[\s]+\{:mvn\/version*')
-  local _, idx_after_version_quote = string.find(cur_line, '.*:mvn\/version\s+"')
+  local name = string.match(cur_line, '%s*([%a%d%-%_%/%.]+)%s+{:mvn/version')
+  local _, idx_after_version_quote = string.find(cur_line, '%s*:mvn/version%s+"')
   local find_version = false
+
   if idx_after_version_quote then
-    find_version = cur_col >= idx_after_third_quote
+    find_version = cur_col + 1 >= idx_after_version_quote
   end
 
   if name == nil then return end
@@ -62,9 +62,10 @@ function source:complete(params, callback)
         name,
         on_exit = function(job)
           local result = job:result()
-          table.remove(result, table.getn(result))
           local items = {}
-          for _, version in ipairs(result) do
+          for idx, item in ipairs(result) do
+            local version = item
+            local order_id = idx
             if opts.only_semantic_versions and not string.match(version, '^%d+%.%d+%.%d+$') then
               goto continue
             else
@@ -75,19 +76,10 @@ function source:complete(params, callback)
               end
             end
 
-            table.insert(items, { label = version })
+            table.insert(items, { label = version, id = order_id })
 
             ::continue::
           end
-          -- unfortunately, nvim-cmp uses its own sorting algorith which doesn't work for semantic versions
-          -- but at least we can bring the original set in order
-          table.sort(items, function(a,b)
-            local a_major,a_minor,a_patch = string.match(a.label, '(%d+)%.(%d+)%.(%d+)')
-            local b_major,b_minor,b_patch = string.match(b.label, '(%d+)%.(%d+)%.(%d+)')
-            if a_major ~= b_major then return tonumber(a_major) > tonumber(b_major) end
-            if a_minor ~= b_minor then return tonumber(a_minor) > tonumber(b_minor) end
-            if a_patch ~= b_patch then return tonumber(a_patch) > tonumber(b_patch) end
-          end)
           callback(items)
         end
     }):start()
