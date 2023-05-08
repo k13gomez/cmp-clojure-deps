@@ -102,7 +102,7 @@ function source:execute(completion_item, callback)
   callback(completion_item)
 end
 
-require('cmp').register_source("cmp-clojure-deps", source.new())
+require('cmp').register_source("clojure-tools-deps", source.new())
 
 return {
   setup = function(_opts)
