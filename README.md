@@ -27,6 +27,19 @@ use {
 }
 ```
 
+For [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```
+{
+  "David-Kunz/cmp-npm",
+  dependencies = { 'nvim-lua/plenary.nvim' },
+  ft = "json",
+  config = function()
+    require('cmp-npm').setup({})
+  end
+}
+```
+
 Run the `setup` function and add the source
 ```lua
 require('cmp-clojure-deps').setup({})
