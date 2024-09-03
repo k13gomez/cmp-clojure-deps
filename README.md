@@ -31,11 +31,11 @@ For [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```
 {
-  "David-Kunz/cmp-npm",
+  "k13gomez/cmp-clojure-deps",
   dependencies = { 'nvim-lua/plenary.nvim' },
   ft = "json",
   config = function()
-    require('cmp-npm').setup({})
+    require('cmp-clojure-deps').setup({})
   end
 }
 ```
