@@ -18,7 +18,7 @@ function source:is_available()
 end
 
 function source:get_debug_name()
-  return 'tools-deps-native'
+  return 'tools-deps-helper'
 end
 
 
@@ -39,7 +39,7 @@ function source:complete(params, callback)
   if opts.only_latest_version then
   Job
     :new({
-        "tools-deps-native",
+        "tools-deps-helper",
         "find-versions",
         name,
         on_exit = function(job)
@@ -57,7 +57,7 @@ function source:complete(params, callback)
     }):start()
   else Job
     :new({
-        "tools-deps-native",
+        "tools-deps-helper",
         "find-versions",
         name,
         on_exit = function(job)
