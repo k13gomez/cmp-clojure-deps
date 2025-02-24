@@ -47,9 +47,7 @@ function source:complete(params, callback)
           local version = result[0]
           if version then
             local versions = {
-              { label = version },
-              { label = "^" .. version },
-              { label = "~" .. version }
+              { label = version, id = 0 },
             }
             callback(versions)
           end
