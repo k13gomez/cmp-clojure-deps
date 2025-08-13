@@ -13,8 +13,7 @@ source.new = function()
 end
 
 function source:is_available()
-  local filename = vim.fn.expand('%:t')
-  return filename == "deps.edn"
+  return true
 end
 
 function source:get_debug_name()
